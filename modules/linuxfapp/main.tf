@@ -5,6 +5,25 @@ resource "azurerm_linux_function_app" "f-app-linux" {
   storage_account_name       = var.lfappsa
   storage_account_access_key = var.lfappsakey
   service_plan_id            = var.lfappspid 
+ 
+  app_settings =  {
+    API_HOST        = ""
+    DSN             = ""
+    ENV             = ""
+    ORGANIZATION_ID = ""
+  }  
+  site_config  {
+    container_registry_use_managed_identity = "true"
 
-  site_config {}
+    application_stack  {
+      docker  {
+      registry_url = "https://ghcr.io"
+      image_name = ""
+      image_tag = ""
+      registry_username = ""
+      registry_password = " "
+      }
+    }     
+  }  
+
 }
